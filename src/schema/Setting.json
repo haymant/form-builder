@@ -1,0 +1,216 @@
+{
+  "title": "Setting",
+  "type": "object",
+  "examples": [
+    {
+      "id": "string"
+    }
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "1bankId": {
+      "type": "string"
+    },
+    "dataset": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/properties/AdvancedFilterModel"
+        }
+      }
+    },
+    "AdvancedFilterModel": {
+      "anyOf": [
+        {
+          "$ref": "#/properties/JoinAdvancedFilterModel"
+        },
+        {
+          "$ref": "#/properties/TextAdvancedFilterModel"
+        },
+        {
+          "$ref": "#/properties/NumberAdvancedFilterModel"
+        },
+        {
+          "$ref": "#/properties/BooleanAdvancedFilterModel"
+        },
+        {
+          "$ref": "#/properties/DateAdvancedFilterModel"
+        },
+        {
+          "$ref": "#/properties/DateStringAdvancedFilterModel"
+        },
+        {
+          "$ref": "#/properties/ObjectAdvancedFilterModel"
+        }
+      ]
+    },
+    "BooleanAdvancedFilterModel": {
+      "properties": {
+        "colId": {
+          "type": "string"
+        },
+        "filterType": {
+          "const": "boolean",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/properties/BooleanAdvancedFilterModelType"
+        }
+      },
+      "type": "object"
+    },
+    "BooleanAdvancedFilterModelType": {
+      "enum": [
+        "false",
+        "true"
+      ],
+      "type": "string"
+    },
+    "DateAdvancedFilterModel": {
+      "properties": {
+        "colId": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "string"
+        },
+        "filterType": {
+          "const": "date",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/properties/ScalarAdvancedFilterModelType"
+        }
+      },
+      "type": "object"
+    },
+    "JoinAdvancedFilterModel": {
+      "properties": {
+        "conditions": {
+          "items": {
+            "$ref": "#/properties/AdvancedFilterModel"
+          },
+          "type": "array"
+        },
+        "filterType": {
+          "const": "join",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DateStringAdvancedFilterModel": {
+      "properties": {
+        "colId": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "string"
+        },
+        "filterType": {
+          "const": "dateString",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/properties/ScalarAdvancedFilterModelType"
+        }
+      },
+      "type": "object"
+    },
+    "NumberAdvancedFilterModel": {
+      "properties": {
+        "colId": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "number"
+        },
+        "filterType": {
+          "const": "number",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/properties/ScalarAdvancedFilterModelType"
+        }
+      },
+      "type": "object"
+    },
+    "ObjectAdvancedFilterModel": {
+      "properties": {
+        "colId": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "string"
+        },
+        "filterType": {
+          "const": "object",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/properties/TextAdvancedFilterModelType"
+        }
+      },
+      "type": "object"
+    },
+    "ScalarAdvancedFilterModelType": {
+      "enum": [
+        "blank",
+        "equals",
+        "greaterThan",
+        "greaterThanOrEqual",
+        "lessThan",
+        "lessThanOrEqual",
+        "notBlank",
+        "notEqual"
+      ],
+      "type": "string"
+    },
+    "TextAdvancedFilterModel": {
+      "properties": {
+        "colId": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "string"
+        },
+        "filterType": {
+          "const": "text",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/properties/TextAdvancedFilterModelType"
+        }
+      },
+      "type": "object"
+    },
+    "TextAdvancedFilterModelType": {
+      "enum": [
+        "blank",
+        "contains",
+        "endsWith",
+        "equals",
+        "notBlank",
+        "notContains",
+        "notEqual",
+        "startsWith"
+      ],
+      "type": "string"
+    }
+  }
+}
